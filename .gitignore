@@ -1,0 +1,50 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Symfony cache/log
+/var/
+/vendor/
+/.env.local
+.env.local.php
+.env.*.local
+
+# Composer
+/composer.lock
+/composer.phar
+
+# PHPUnit
+/phpunit.xml
+/phpunit.xml.dist
+/phpunit.result.cache
+/.phpunit.result.cache
+
+# PHPStorm
+.idea/
+/*.iml
+
+# VSCode
+.vscode/
+
+# Logs and coverage
+/log/
+/coverage/
+/build/
+
+# PHPStan
+/phpstan.neon.local
+/phpstan.cache
+
+# Static analysis and CI
+/.php-cs-fixer.cache
+/.phpunit.cache
+/.phpunit.result.cache
+
+# Node
+/node_modules/
+yarn.lock
+package-lock.json
+
+# Tests output
+tests/output/
