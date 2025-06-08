@@ -1,3 +1,3 @@
 # AttributeExecutionBundle
 
-Generic attribute execution system for Symfony
+Generic attribute execution system for Symfony.
