@@ -2,7 +2,7 @@
 
 namespace Arnaud23\AttributeExecutionBundle\Middleware;
 
-use Arnaud23\AttributeExecutionBundle\Attribute\Secure;
+use Arnaud23\AttributeExecutionBundle\Attribute\Security;
 use Arnaud23\AttributeExecutionBundle\Pipeline\AttributeMiddlewareInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -18,8 +18,8 @@ class SecurityMiddleware implements AttributeMiddlewareInterface
         $refMethod = $refClass->getMethod($method);
 
         $attributes = array_merge(
-            $refClass->getAttributes(Secure::class),
-            $refMethod->getAttributes(Secure::class)
+            $refClass->getAttributes(Security::class),
+            $refMethod->getAttributes(Security::class)
         );
 
         if (empty($attributes)) {
