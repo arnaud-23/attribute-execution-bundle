@@ -1,0 +1,15 @@
+parameters:
+    level: 9
+    paths:
+        - src
+    exceptions:
+        check:
+            missingCheckedExceptionInThrows: true
+            tooWideThrowType: true
+        uncheckedExceptionClasses:
+            - RuntimeException
+            - LogicException
+            - JsonException
+            - PHPUnit\Framework\Exception
+            - ReflectionException
+            - Psr\Cache\CacheException

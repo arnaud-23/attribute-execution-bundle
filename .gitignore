@@ -18,6 +18,7 @@
 /phpunit.xml
 /phpunit.xml.dist
 /phpunit.result.cache
+/.phpunit.cache
 /.phpunit.result.cache
 
 # PHPStorm
@@ -38,8 +39,6 @@
 
 # Static analysis and CI
 /.php-cs-fixer.cache
-/.phpunit.cache
-/.phpunit.result.cache
 
 # Node
 /node_modules/
