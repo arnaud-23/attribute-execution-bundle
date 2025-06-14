@@ -1,4 +1,4 @@
-.PHONY: setup start stop test phpstan clean
+.PHONY: setup start stop test phpstan clean coverage coverage-html
 
 # Setup the project
 setup:
@@ -17,6 +17,14 @@ stop:
 test:
 	docker-compose exec php vendor/bin/phpunit -c phpunit.xml.dist --testdox
 
+# Run PHPUnit tests with coverage
+coverage:
+	docker-compose exec php vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover build/coverage/coverage.xml
+
+# Run PHPUnit tests with HTML coverage report
+coverage-html:
+	docker-compose exec php vendor/bin/phpunit -c phpunit.xml.dist --coverage-html build/coverage/html
+
 # Run PHPStan analysis
 phpstan:
 	docker-compose exec php vendor/bin/phpstan analyse -c phpstan.neon --ansi
@@ -25,4 +33,5 @@ phpstan:
 clean:
 	docker-compose down -v
 	rm -rf vendor/
-	rm -rf .phpunit.cache/ 
+	rm -rf .phpunit.cache/
+	rm -rf build/coverage/ 

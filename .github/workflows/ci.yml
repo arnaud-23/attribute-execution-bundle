@@ -20,14 +20,20 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
-        coverage: none
+        coverage: xdebug
         tools: composer:v2
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Run tests
-      run: vendor/bin/phpunit -c phpunit.xml.dist --testdox
+    - name: Run tests with coverage
+      run: vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover build/coverage/coverage.xml --coverage-html build/coverage/html
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./build/coverage/coverage.xml
+        fail_ci_if_error: true
 
     - name: Run PHPStan
       run: vendor/bin/phpstan analyse -c phpstan.neon --ansi

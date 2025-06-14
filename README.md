@@ -5,7 +5,7 @@
 [![PHP Version](https://img.shields.io/badge/PHP-8.1%2B-blue.svg)](https://php.net)
 [![Symfony Version](https://img.shields.io/badge/Symfony-6.0%2B-blue.svg)](https://symfony.com)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/arnaud-23/attribute-execution-bundle/actions)
+[![Code Coverage](https://codecov.io/gh/arnaud-23/attribute-execution-bundle/branch/main/graph/badge.svg)](https://codecov.io/gh/arnaud-23/attribute-execution-bundle)
 
 Generic attribute execution system for Symfony.
 
@@ -17,7 +17,7 @@ Generic attribute execution system for Symfony.
   - Cache (with configurable strategies)
   - Transaction management
 - Extensible architecture for custom middleware
-- 100% test coverage
+- High test coverage
 - Static analysis with PHPStan level 8
 - PSR-12 compliant code style
 
@@ -54,6 +54,12 @@ composer install
 
 # Run tests
 make test
+
+# Run tests with coverage
+make coverage
+
+# Generate HTML coverage report
+make coverage-html
 
 # Run static analysis
 make phpstan
