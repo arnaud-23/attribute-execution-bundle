@@ -6,7 +6,11 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class DoctrineTransactionStrategy implements TransactionStrategyInterface
 {
-    public function __construct(private EntityManagerInterface $em, private string $name) {}
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly string $name
+    ) {
+    }
 
     public function supports(string $name): bool
     {

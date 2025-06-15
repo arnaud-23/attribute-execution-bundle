@@ -4,7 +4,10 @@ namespace Arnaud23\AttributeExecutionBundle\Strategy\Transaction;
 
 class TransactionStrategyResolver
 {
-    public function __construct(private iterable $strategies) {}
+    /**
+     * @param iterable<TransactionStrategyInterface> $strategies
+     */
+    public function __construct(private readonly iterable $strategies) {}
 
     public function resolve(string $name): TransactionStrategyInterface
     {

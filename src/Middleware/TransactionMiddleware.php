@@ -9,22 +9,27 @@ use ReflectionClass;
 
 class TransactionMiddleware implements AttributeMiddlewareInterface
 {
-    public function __construct(private TransactionStrategyResolver $resolver) {}
+    public function __construct(private readonly TransactionStrategyResolver $resolver) {}
 
+    /**
+     * @throws \ReflectionException
+     * @throws \Throwable
+     */
     public function process(object $instance, string $method, array $args, callable $next): mixed
     {
         $refClass = new ReflectionClass($instance);
         $refMethod = $refClass->getMethod($method);
 
         $attributes = array_merge(
+            $refMethod->getAttributes(Transactional::class),
             $refClass->getAttributes(Transactional::class),
-            $refMethod->getAttributes(Transactional::class)
         );
 
         if (empty($attributes)) {
             return $next($instance, $method, $args);
         }
 
+        /** @var Transactional $transactional */
         $transactional = $attributes[0]->newInstance();
         $strategy = $this->resolver->resolve($transactional->connection);
 
