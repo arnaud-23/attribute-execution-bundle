@@ -4,16 +4,18 @@ namespace Arnaud23\AttributeExecutionBundle\Pipeline;
 
 class AttributePipeline
 {
-    public function __construct(private array $middlewares) {}
+    /**
+     * @param array<AttributeMiddlewareInterface> $middlewares
+     */
+    public function __construct(private readonly array $middlewares) {}
 
     public function handle(object $instance, string $method, array $args): mixed
     {
-        $core = fn($instance, $method, $args) => $instance->$method(...$args);
-
+        // Add the core middleware at the end of the pipeline
         $pipeline = array_reduce(
-            array_reverse($this->middlewares),
-            fn($next, $middleware) => fn($i, $m, $a) => $middleware->process($i, $m, $a, $next),
-            $core
+            array_reverse([...$this->middlewares, new CoreMiddleware()]),
+            static fn($next, $middleware) => static fn($i, $m, $a) => $middleware->process($i, $m, $a, $next),
+            static fn($i, $m, $a) => null // This will never be called as CoreMiddleware is last
         );
 
         return $pipeline($instance, $method, $args);

@@ -4,6 +4,9 @@ namespace Arnaud23\AttributeExecutionBundle\Strategy\Cache;
 
 class CacheStrategyResolver
 {
+    /**
+     * @param iterable<CacheStrategyInterface> $strategies
+     */
     public function __construct(private iterable $strategies) {}
 
     public function resolve(string $name): CacheStrategyInterface

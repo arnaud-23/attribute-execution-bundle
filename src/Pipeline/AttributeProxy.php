@@ -7,8 +7,8 @@ use Symfony\Contracts\Service\ServiceSubscriberInterface;
 class AttributeProxy implements ServiceSubscriberInterface
 {
     public function __construct(
-        private object $inner,
-        private AttributeDispatcher $dispatcher
+        private readonly object $inner,
+        private readonly AttributeDispatcher $dispatcher
     ) {}
 
     public function __call(string $method, array $args): mixed

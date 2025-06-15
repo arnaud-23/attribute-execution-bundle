@@ -6,6 +6,7 @@ use Arnaud23\AttributeExecutionBundle\Pipeline\AttributeProxy;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Arnaud23\AttributeExecutionBundle\Pipeline\AttributeDispatcher;
 
 class AttributeProxyCompilerPass implements CompilerPassInterface
 {
@@ -18,7 +19,7 @@ class AttributeProxyCompilerPass implements CompilerPassInterface
                 ->setDecoratedService($id)
                 ->setArguments([
                     new Reference($decoratorId . '.inner'),
-                    new Reference('Arnaud23\AttributeExecutionBundle\Pipeline\AttributeDispatcher'),
+                    new Reference(AttributeDispatcher::class),
                 ]);
         }
     }

@@ -10,16 +10,19 @@ use ReflectionMethod;
 
 class CacheMiddleware implements AttributeMiddlewareInterface
 {
-    public function __construct(private CacheStrategyResolver $resolver) {}
+    public function __construct(private readonly CacheStrategyResolver $resolver) {}
 
+    /**
+     * @throws \ReflectionException
+     */
     public function process(object $instance, string $method, array $args, callable $next): mixed
     {
         $refClass = new ReflectionClass($instance);
         $refMethod = $refClass->getMethod($method);
 
         $attributes = array_merge(
+            $refMethod->getAttributes(Cache::class),
             $refClass->getAttributes(Cache::class),
-            $refMethod->getAttributes(Cache::class)
         );
 
         if (empty($attributes)) {
@@ -35,6 +38,7 @@ class CacheMiddleware implements AttributeMiddlewareInterface
             return $result;
         }
 
+        // Let the next middleware (which will eventually be CoreMiddleware) execute the method
         $result = $next($instance, $method, $args);
         $strategy->set($cacheKey, $result, $cacheAttr->ttl);
         return $result;
