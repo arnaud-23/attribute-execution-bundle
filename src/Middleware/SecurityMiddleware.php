@@ -10,26 +10,29 @@ use ReflectionClass;
 
 class SecurityMiddleware implements AttributeMiddlewareInterface
 {
-    public function __construct(private AuthorizationCheckerInterface $checker) {}
+    public function __construct(private readonly AuthorizationCheckerInterface $checker) {}
 
+    /**
+     * @throws \ReflectionException
+     */
     public function process(object $instance, string $method, array $args, callable $next): mixed
     {
         $refClass = new ReflectionClass($instance);
         $refMethod = $refClass->getMethod($method);
 
         $attributes = array_merge(
+            $refMethod->getAttributes(Security::class),
             $refClass->getAttributes(Security::class),
-            $refMethod->getAttributes(Security::class)
         );
 
         if (empty($attributes)) {
             return $next($instance, $method, $args);
         }
 
-        $secure = $attributes[0]->newInstance();
+        $security = $attributes[0]->newInstance();
 
-        if (!$this->checker->isGranted($secure->role)) {
-            throw new AccessDeniedException("Access denied: requires role {$secure->role}");
+        if (!$this->checker->isGranted($security->role)) {
+            throw new AccessDeniedException("Access denied: requires role {$security->role}");
         }
 
         return $next($instance, $method, $args);
