@@ -16,7 +16,6 @@
 
 # PHPUnit
 /phpunit.xml
-/phpunit.xml.dist
 /phpunit.result.cache
 /.phpunit.cache
 /.phpunit.result.cache

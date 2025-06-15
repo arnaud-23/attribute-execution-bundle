@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+         colors="true"
+         bootstrap="vendor/autoload.php"
+         cacheDirectory=".phpunit.cache"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         failOnWarning="true"
+         failOnNotice="true"
+         failOnDeprecation="true"
+>
+    <testsuites>
+        <testsuite name="AttributeExecutionBundle Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <directory>vendor</directory>
+            <directory>tests</directory>
+        </exclude>
+    </source>
+
+    <coverage>
+        <report>
+            <clover outputFile="build/coverage/coverage.xml"/>
+            <html outputDirectory="build/coverage/html"/>
+        </report>
+    </coverage>
+
+    <php>
+        <env name="APP_ENV" value="test"/>
+        <env name="SHELL_VERBOSITY" value="-1"/>
+        <env name="SYMFONY_PHPUNIT_VERSION" value="10.5"/>
+        <env name="SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT" value="1"/>
+    </php>
+</phpunit>
