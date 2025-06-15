@@ -11,6 +11,9 @@ class AttributeProxy implements ServiceSubscriberInterface
         private readonly AttributeDispatcher $dispatcher
     ) {}
 
+    /**
+     * @param array<string, mixed> $args
+     */
     public function __call(string $method, array $args): mixed
     {
         return $this->dispatcher->dispatch($this->inner, $method, $args);

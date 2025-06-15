@@ -12,6 +12,8 @@ class TransactionMiddleware implements AttributeMiddlewareInterface
     public function __construct(private readonly TransactionStrategyResolver $resolver) {}
 
     /**
+     * @param array<string, mixed> $args
+     *
      * @throws \ReflectionException
      * @throws \Throwable
      */

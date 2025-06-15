@@ -13,6 +13,8 @@ class CacheMiddleware implements AttributeMiddlewareInterface
     public function __construct(private readonly CacheStrategyResolver $resolver) {}
 
     /**
+     * @param array<string, mixed> $args
+     *
      * @throws \ReflectionException
      */
     public function process(object $instance, string $method, array $args, callable $next): mixed

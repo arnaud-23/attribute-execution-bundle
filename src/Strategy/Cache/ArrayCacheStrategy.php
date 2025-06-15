@@ -4,6 +4,9 @@ namespace Arnaud23\AttributeExecutionBundle\Strategy\Cache;
 
 class ArrayCacheStrategy implements CacheStrategyInterface
 {
+    /**
+     * @var array<string, array<string, mixed>>
+     */
     private array $cache = [];
 
     public function supports(string $name): bool

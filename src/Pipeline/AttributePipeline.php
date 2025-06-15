@@ -9,6 +9,9 @@ class AttributePipeline
      */
     public function __construct(private readonly array $middlewares) {}
 
+    /**
+     * @param array<string, mixed> $args
+     */
     public function handle(object $instance, string $method, array $args): mixed
     {
         // Add the core middleware at the end of the pipeline
