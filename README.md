@@ -27,6 +27,50 @@ Generic attribute execution system for Symfony.
 composer require arnaud-23/attribute-execution-bundle
 ```
 
+## Setup
+
+The bundle will be automatically registered in your Symfony application. No additional configuration is required to start using the attributes.
+
+### Service Configuration
+
+Services using the bundle's attributes are automatically configured with the attribute proxy. You don't need to add any additional tags or configuration.
+
+```yaml
+# config/services.yaml
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # Your services will be automatically configured when using attributes
+    App\Service\YourService: ~
+```
+
+### Cache Configuration
+
+If you're using the cache attribute, you can configure the cache strategies in your configuration:
+
+```yaml
+# config/packages/attribute_execution.yaml
+attribute_execution:
+    cache:
+        strategies:
+            array: ~  # Uses Symfony's ArrayAdapter
+            redis:    # Uses Redis
+                dsn: 'redis://localhost:6379'
+                options:
+                    prefix: 'app_cache_'
+```
+
+### Security Configuration
+
+The security attribute requires the Symfony Security component to be installed:
+
+```bash
+composer require symfony/security-bundle
+```
+
 ## Usage
 
 ```php
@@ -44,6 +88,26 @@ class YourService
         // Your code here
     }
 }
+```
+
+### Available Attributes
+
+#### Security
+```php
+#[Security('ROLE_ADMIN')]  // Method or class level
+```
+
+#### Cache
+```php
+#[Cache]                    // Uses default strategy (array) with 300s TTL
+#[Cache(strategy: 'custom')] // Uses custom strategy
+#[Cache(ttl: 3600)]         // Custom TTL in seconds
+```
+
+#### Transaction
+```php
+#[Transactional]            // Uses default connection
+#[Transactional('custom')]  // Uses custom connection
 ```
 
 ## Development
