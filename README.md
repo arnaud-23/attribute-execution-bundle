@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/arnaud-23/attribute-execution-bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/arnaud-23/attribute-execution-bundle/actions/workflows/ci.yml)
 [![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat)](https://phpstan.org)
-[![PHP Version](https://img.shields.io/badge/PHP-8.1%2B-blue.svg)](https://php.net)
+[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
 [![Symfony Version](https://img.shields.io/badge/Symfony-6.0%2B-blue.svg)](https://symfony.com)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Code Coverage](https://codecov.io/gh/arnaud-23/attribute-execution-bundle/branch/main/graph/badge.svg)](https://codecov.io/gh/arnaud-23/attribute-execution-bundle)
