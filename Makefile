@@ -1,4 +1,4 @@
-.PHONY: setup start stop test phpstan clean coverage coverage-html
+.PHONY: setup start stop test phpstan clean coverage coverage-html xdebug-coverage xdebug-debug xdebug-off
 
 # Setup the project
 setup:
@@ -19,10 +19,14 @@ test:
 
 # Run PHPUnit tests with coverage
 coverage:
+	docker-compose exec php mkdir -p build/coverage
+	docker-compose exec php chmod -R 777 build/coverage
 	docker-compose exec php vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover build/coverage/coverage.xml
 
 # Run PHPUnit tests with HTML coverage report
 coverage-html:
+	docker-compose exec php mkdir -p build/coverage/html
+	docker-compose exec php chmod -R 777 build/coverage
 	docker-compose exec php vendor/bin/phpunit -c phpunit.xml.dist --coverage-html build/coverage/html
 
 # Run PHPStan analysis
@@ -34,4 +38,4 @@ clean:
 	docker-compose down -v
 	rm -rf vendor/
 	rm -rf .phpunit.cache/
-	rm -rf build/coverage/ 
+	rm -rf build/coverage/
